@@ -21,25 +21,25 @@
         <li>
           {{partData.firstBullet}}
           <span>
-            <CopyButton :copyText="partData.price" />
+            <CopyButton :copyText="partData.firstBullet" />
           </span>
         </li>
         <li>
           {{partData.secondBullet}}
           <span>
-            <CopyButton :copyText="partData.price" />
+            <CopyButton :copyText="partData.secondBullet" />
           </span>
         </li>
         <li>
           {{partData.thirdBullet}}
           <span>
-            <CopyButton :copyText="partData.price" />
+            <CopyButton :copyText="partData.thirdBullet" />
           </span>
         </li>
         <li>
           {{partData.fourthBullet}}
           <span>
-            <CopyButton :copyText="partData.price" />
+            <CopyButton :copyText="partData.fourthBullet" />
           </span>
         </li>
       </ul>
