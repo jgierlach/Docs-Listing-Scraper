@@ -34,13 +34,39 @@ export default (app, http) => {
         const element = document.querySelector('.price').textContent;
         return element
       });
-      price = price.split(" ")[1]
+      if (price.split(" ").length === 1) {
+        price = price.split(" ")[0]
+      } else {
+        price = price.split(" ")[1]
+      }
 
       // Extract the part number and prefix it with the Doc's D
       const partName = `D${partNumber.slice(2, partNumber.length)}`
 
-      // Find replaces at text
-      const replaces = await page.$$(".woocommerce-product-details__short-description")
+      // Generate the product description
+      const productDescription = await page.evaluate(async () => {
+        const element = document.querySelector(".woocommerce-product-details__short-description").textContent
+        return element
+      })
+
+      // Split product description into an array and then filter for the comapanies that Doc's replaces
+      const replaceValuesArray = productDescription.split("\n").filter(el => {
+        if (el.includes("GMB") || el.includes("Spicer") || el.includes("Precision") || el.includes("NEAPCO") || el.includes("Rockford")) {
+          return true
+        }
+        return false
+      })
+
+      // Format replacement values for keywords field
+      const replacementKeywords = replaceValuesArray.join(" ")
+
+      // Check to see if there were any replacement values
+      let replaceValues = ""
+      if (replaceValuesArray.length === 0) {
+        replaceValues = "This listing had no replacement parts listed so don't use this bullet point."
+      } else {
+        replaceValues = replaceValuesArray.join(", ")
+      }
 
       // Format all of the part data into an object
       const partData =
@@ -48,11 +74,11 @@ export default (app, http) => {
         price: price,
         img: src,
         title: `Doc's Auto Parts | ${partName} | Universal Joint | ${location}`,
-        firstBullet: `REPLACES - `,
+        firstBullet: `REPLACES - ${replaceValues}`,
         secondBullet: `BUILT TO LAST - Our ${partName} U Joint is made with chrome-nickel alloy steel that is induction heated with hardened bearing caps and coated to resist oxidation and corrosion. You can be sure this U joint is in it for the long haul.`,
         thirdBullet: `OEM GRADE QUALITY - We stand behind the durability and quality of every single one of our parts. Our U Joints are thoroughly tested and of OEM grade quality.`,
         fourthBullet: `FAMILY VALUES - Docs Auto Parts is a family business and those family values extend to all our customers. If you feel our product has not lived up to your expectations in some way please reach out to us and we’ll resolve your concerns immediately!`,
-        keywords: `spicer life non greaseable universal joint snap ring outside style bearing cap diameter strength alloy steel cross torque horsepower flush lube fitting needle hardness carboxylated nitrile rubber grease seal use compressed double lip design moog`
+        keywords: `${replacementKeywords} non greaseable universal joint snap ring outside style bearing cap diameter strength alloy steel cross flush lube hardness carboxylated nitrile rubber grease seal compressed design moog ujoint`
       }
 
       // console.log('partData', partData)
