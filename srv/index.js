@@ -78,7 +78,7 @@ export default (app, http) => {
         secondBullet: `BUILT TO LAST - Our ${partName} U Joint is made with chrome-nickel alloy steel that is induction heated with hardened bearing caps and coated to resist oxidation and corrosion. You can be sure this U joint is in it for the long haul.`,
         thirdBullet: `OEM GRADE QUALITY - We stand behind the durability and quality of every single one of our parts. Our U Joints are thoroughly tested and of OEM grade quality.`,
         fourthBullet: `FAMILY VALUES - Docs Auto Parts is a family business and those family values extend to all our customers. If you feel our product has not lived up to your expectations in some way please reach out to us and we’ll resolve your concerns immediately!`,
-        keywords: `${replacementKeywords} non greaseable universal joint snap ring outside style bearing cap diameter strength alloy steel cross flush lube hardness carboxylated nitrile rubber grease seal compressed design moog ujoint`
+        keywords: `non greaseable universal joint snap ring outside style bearing cap diameter strength alloy steel cross torque horsepower flush lube hardness carboxylated nitrile rubber grease seal use compressed double lip design ujoint u`
       }
 
       // console.log('partData', partData)

@@ -3,19 +3,44 @@
     <input v-model="partNumber" placeholder="Enter Part Number" />
     <button class="generate-listing-btn" @click="scrapeDocs">Generate Listing</button>
     <br />
+    <h2>Automotive > Replacement Parts > Transmission and Drive Train > Universal Joints and Parts > Universal Joints</h2>
     <h1>
       {{partData.title}}
       <span>
         <CopyButton :copyText="partData.title" />
       </span>
     </h1>
+    <!-- Name Of Manufacturer -->
+    <h2>
+      {{manufacturer}}
+      <span>
+        <CopyButton :copyText="manufacturer" />
+      </span>
+    </h2>
+    <!-- Manufacturer Part Number -->
+    <h2>
+      {{manufacturerPartNumber}}
+      <span>
+        <CopyButton :copyText="manufacturerPartNumber" />
+      </span>
+    </h2>
+    <!-- Seller Sku -->
+    <h2>
+      {{sellerSku}}
+      <span>
+        <CopyButton :copyText="sellerSku" />
+      </span>
+    </h2>
     <h1>
       {{partData.price}}
       <span>
         <CopyButton :copyText="partData.price" />
       </span>
     </h1>
-    <!-- <br /> -->
+    <a :href="partData.img" target="_blank">
+      <button class="generate-img">Generate Full Image</button>
+    </a>
+    <br />
     <div class="center">
       <ul class="left width">
         <li>
@@ -53,9 +78,7 @@
         </span>
       </p>
     </div>
-    <a :href="partData.img" target="_blank">
-      <button class="generate-img">Generate Full Image</button>
-    </a>
+
     <br />
     <!-- <img class="format-img" alt="docs image" :src="partData.img" /> -->
   </div>
@@ -74,7 +97,16 @@ export default {
     return {
       partData: {},
       partNumber: '',
+      manufacturer: `Doc's Auto Parts`,
     }
+  },
+  computed: {
+    manufacturerPartNumber() {
+      return this.partNumber.slice(2, this.partNumber.length)
+    },
+    sellerSku() {
+      return `DOCS-D${this.manufacturerPartNumber}-UNIVERSALJOINTS`
+    },
   },
   methods: {
     async scrapeDocs() {
