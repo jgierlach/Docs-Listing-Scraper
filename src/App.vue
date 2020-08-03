@@ -3,20 +3,54 @@
     <input v-model="partNumber" placeholder="Enter Part Number" />
     <button @click="scrapeDocs">Generate Listing</button>
     <br />
-    <h1>{{partData.title}}</h1>
+    <h1>
+      {{partData.title}}
+      <span>
+        <CopyButton :copyText="partData.title" />
+      </span>
+    </h1>
+    <h1>
+      {{partData.price}}
+      <span>
+        <CopyButton :copyText="partData.price" />
+      </span>
+    </h1>
     <!-- <br /> -->
     <div class="center">
       <ul class="left width">
-        <li>{{partData.firstBullet}}</li>
-        <li>{{partData.secondBullet}}</li>
-        <li>{{partData.thirdBullet}}</li>
-        <li>{{partData.fourthBullet}}</li>
+        <li>
+          {{partData.firstBullet}}
+          <span>
+            <CopyButton :copyText="partData.price" />
+          </span>
+        </li>
+        <li>
+          {{partData.secondBullet}}
+          <span>
+            <CopyButton :copyText="partData.price" />
+          </span>
+        </li>
+        <li>
+          {{partData.thirdBullet}}
+          <span>
+            <CopyButton :copyText="partData.price" />
+          </span>
+        </li>
+        <li>
+          {{partData.fourthBullet}}
+          <span>
+            <CopyButton :copyText="partData.price" />
+          </span>
+        </li>
       </ul>
     </div>
     <div class="center">
       <p class="left width">
-        <strong>keywords:</strong>
+        <strong>Keywords:</strong>
         {{partData.keywords}}
+        <span>
+          <CopyButton :copyText="partData.price" />
+        </span>
       </p>
     </div>
     <br />
@@ -26,10 +60,13 @@
 
 <script>
 import axios from 'axios'
+import CopyButton from './components/CopyButton.vue'
 
 export default {
   name: 'App',
-  components: {},
+  components: {
+    CopyButton,
+  },
   data() {
     return {
       partData: {},

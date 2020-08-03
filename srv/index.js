@@ -17,6 +17,12 @@ export default (app, http) => {
       const page = await browser.newPage()
       await page.goto(url)
 
+      // Find the location
+      const location = await page.evaluate(async () => {
+        const element = document.querySelector(".location").textContent
+        return element
+      })
+
       // Find the images src
       const src = await page.evaluate(async () => {
         const element = document.querySelector('.zoomImg').getAttribute('src')
@@ -41,7 +47,7 @@ export default (app, http) => {
       {
         price: price,
         img: src,
-        title: `Doc's Auto Parts | ${partName} | Universal Joint`,
+        title: `Doc's Auto Parts | ${partName} | Universal Joint | ${location}`,
         firstBullet: `REPLACES - `,
         secondBullet: `BUILT TO LAST - Our ${partName} U Joint is made with chrome-nickel alloy steel that is induction heated with hardened bearing caps and coated to resist oxidation and corrosion. You can be sure this U joint is in it for the long haul.`,
         thirdBullet: `OEM GRADE QUALITY - We stand behind the durability and quality of every single one of our parts. Our U Joints are thoroughly tested and of OEM grade quality.`,
